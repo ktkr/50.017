@@ -1,0 +1,3 @@
+﻿  pendulumSystem.cpp
+pendulumSystem.cpp(56): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
+  a3.vcxproj -> C:\Users\kevin\Documents\GnV\three\Debug\a3.exe
