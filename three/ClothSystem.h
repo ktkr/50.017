@@ -15,13 +15,22 @@ class ClothSystem: public ParticleSystem
 {
 ///ADD MORE FUNCTION AND FIELDS HERE
 public:
-	ClothSystem();
+	int indexOf(int row, int column);
+	ClothSystem(int length);
 	vector<Vector3f> evalF(vector<Vector3f> state);
-	
+	vector<Vector3f> state; //first layer indices for row. second layer: Even indices for position, Odd indices for velocity
 	void draw();
 
-private:
+	//initialize structural springs
+	vector<Spring> structural;
+	//initialize shear springs
+	vector<Spring> shear;
+	//initialize flex springs
+	vector<Spring> flex;
 
+private:
+	//assume cloth is always square
+	int side_length;
 };
 
 

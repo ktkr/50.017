@@ -32,7 +32,9 @@ namespace
   {
     // seed the random number generator with the current time
     srand( time( NULL ) );
-    system = new PendulumSystem(1); //set system when S is pressed?
+	//system = new SimpleSystem();
+    system = new PendulumSystem(4); //set system when S is pressed?
+	
 	//argc is the number of arguments
 	if (argc >= 2) {
 		switch (*argv[1]) {

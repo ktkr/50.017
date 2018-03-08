@@ -10,6 +10,7 @@
 #endif
 
 #include "particleSystem.h"
+#include "spring.h"
 
 class PendulumSystem: public ParticleSystem
 {
@@ -20,7 +21,8 @@ public:
 	
 	void draw();
 	
-	vector<Vector3f> springs;
+	//i,j,rest length
+	vector<Spring> springs;
 };
 
 #endif

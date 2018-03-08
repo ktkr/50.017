@@ -84,6 +84,7 @@
     <ClCompile Include="particleSystem.cpp" />
     <ClCompile Include="pendulumSystem.cpp" />
     <ClCompile Include="simpleSystem.cpp" />
+    <ClCompile Include="spring.cpp" />
     <ClCompile Include="TimeStepper.cpp" />
     <ClCompile Include="vecmath\src\Matrix2f.cpp" />
     <ClCompile Include="vecmath\src\Matrix3f.cpp" />
@@ -99,6 +100,7 @@
     <ClInclude Include="particleSystem.h" />
     <ClInclude Include="pendulumSystem.h" />
     <ClInclude Include="simpleSystem.h" />
+    <ClInclude Include="spring.h" />
     <ClInclude Include="TimeStepper.hpp" />
     <ClInclude Include="vecmath\include\Matrix2f.h" />
     <ClInclude Include="vecmath\include\Matrix3f.h" />
