@@ -14,8 +14,8 @@ ClothSystem::ClothSystem(int length)
 	for (unsigned i = 0; i < length; i++) {
 		
 		for (unsigned j = 0; j < length; j++) {
-			state.push_back(Vector3f(j*0.7f + 0.5f,i*-0.7f + 5.0f,0)); // position
-			state.push_back(Vector3f(0.0f)); // velocity
+			state.push_back(Vector3f(j*0.2f + 0.5f,i*-0.2f + 3.0f,0)); // position
+			state.push_back(Vector3f::ZERO); // velocity
 		}
 	}
 
@@ -68,16 +68,16 @@ ClothSystem::ClothSystem(int length)
 #pragma endregion
 }
 
-
+#pragma region eval
 // TODO: implement evalF
 // for a given state, evaluate f(X,t)
 vector<Vector3f> ClothSystem::evalF(vector<Vector3f> state)
 {
 	vector<Vector3f> f;
-	float mass = 0.05f;
+	float mass = 0.005f;
 	float g = 9.81f;
 	float drag_coeff = 0.1f;
-	float spring_const = 30.0f;
+	float spring_const = 5.0f;
 	Vector3f weight = Vector3f(0, -mass * g, 0);
 
 	//for each particle, generate the drag and weight
@@ -114,8 +114,11 @@ vector<Vector3f> ClothSystem::evalF(vector<Vector3f> state)
 	}
 
 	if (wind) {
-		Vector3f wind = (0, 0, 0.2f);
+		float r = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+		Vector3f wind = Vector3f::ZERO + Vector3f(0,0,r*0.1);
+		
 		for (int i = 0; i < f.size() / 2; i++) {
+			
 			f[2 * i + 1] += wind;
 		}
 	}
@@ -125,38 +128,39 @@ vector<Vector3f> ClothSystem::evalF(vector<Vector3f> state)
 	}
 
 	if (!moving) {
-		f[0] = Vector3f(0);
-		f[1] = Vector3f(0);
+		f[0] = Vector3f::ZERO;
+		f[1] = Vector3f::ZERO;
 
-		f[2 * side_length - 2] = Vector3f(0);
-		f[2 * side_length - 1] = Vector3f(0);
+		f[2 * side_length - 2] = Vector3f::ZERO;
+		f[2 * side_length - 1] = Vector3f::ZERO;
 	}
 	else {
 		Vector3f speed;
-		if (getState()[0].z() > 10){
+		if (getState()[0].z() > 3){
 			forward = false;
 		}
-		if (getState()[0].z() < -10) {
+		if (getState()[0].z() < -3) {
 			forward = true;
 		}
 
 		if (forward) {
-			speed = Vector3f(0, 0, 10.0f);
+			speed = Vector3f(0, 0, 3.0f);
 		}
 		else {
-			speed = Vector3f(0, 0, -10.0f);
+			speed = Vector3f(0, 0, -3.0f);
 		}
 		f[0] = speed;
-		f[1] = Vector3f(0);
+		f[1] = Vector3f::ZERO;
 
 		f[2 * side_length - 2] = speed;
-		f[2 * side_length - 1] = Vector3f(0);
+		f[2 * side_length - 1] = Vector3f::ZERO;
 	}
 	//return velocity, force for each particle
 	return f;
 }
+#pragma endregion
 
-///TODO: render the system (ie draw the particles)
+#pragma region draw
 void ClothSystem::draw()
 {
 
@@ -259,3 +263,4 @@ void ClothSystem::draw()
 
 }
 
+#pragma endregion

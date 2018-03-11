@@ -35,7 +35,7 @@ namespace
     srand( time( NULL ) );
 	//system = new SimpleSystem();
 	//system = new PendulumSystem(4);
-    sys = new ClothSystem(10); //set system when S is pressed?
+    sys = new ClothSystem(8); //set system when S is pressed?
 	
 	//argc is the number of arguments
 	if (argc >= 2) {
@@ -161,14 +161,29 @@ namespace
 				sys = new PendulumSystem(4);
 			}
 			else if (sys_count == 2) {
-				sys = new ClothSystem(10);
+				sys = new ClothSystem(8);
 			}
 			sys_count = (sys_count + 1) % 3;
-
+			break;
 		}
 		case 'd':
+		{
 			sys->wind = !sys->wind;
-
+			break;
+		}
+		case 'r': //just reinstance
+		{
+			if (sys_count == 0) {
+				sys = new SimpleSystem();
+			}
+			else if (sys_count == 1) {
+				sys = new PendulumSystem(4);
+			}
+			else if (sys_count == 2) {
+				sys = new ClothSystem(8);
+			}
+			break;
+		}
         default:
             cout << "Unhandled key press " << key << "." << endl;        
         }

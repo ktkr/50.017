@@ -8,7 +8,8 @@ ClothSystem.cpp(38): warning C4018: '<': signed/unsigned mismatch
 ClothSystem.cpp(44): warning C4018: '<': signed/unsigned mismatch
 ClothSystem.cpp(55): warning C4018: '<': signed/unsigned mismatch
 ClothSystem.cpp(60): warning C4018: '<': signed/unsigned mismatch
-ClothSystem.cpp(118): warning C4018: '<': signed/unsigned mismatch
-ClothSystem.cpp(170): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
-ClothSystem.cpp(174): warning C4018: '<': signed/unsigned mismatch
+ClothSystem.cpp(118): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+ClothSystem.cpp(120): warning C4018: '<': signed/unsigned mismatch
+ClothSystem.cpp(173): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
+ClothSystem.cpp(177): warning C4018: '<': signed/unsigned mismatch
   a3.vcxproj -> C:\Users\kevin\Documents\GnV\three\Debug\a3.exe
