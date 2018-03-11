@@ -1,3 +1,4 @@
+
 #include "spring.h"
 
 Spring::Spring(int n1, int n2, float rl) {

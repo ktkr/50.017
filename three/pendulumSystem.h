@@ -3,6 +3,7 @@
 
 #include <vecmath.h>
 #include <vector>
+#include "spring.h"
 #ifdef _WIN32
 #include "GL/freeglut.h"
 #else
@@ -10,7 +11,7 @@
 #endif
 
 #include "particleSystem.h"
-#include "spring.h"
+
 
 class PendulumSystem: public ParticleSystem
 {

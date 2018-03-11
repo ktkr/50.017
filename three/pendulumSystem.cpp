@@ -52,7 +52,6 @@ vector<Vector3f> PendulumSystem::evalF(vector<Vector3f> state)
 		Vector3f distance = state[i];
 		Vector3f drag = Vector3f(-drag_coeff * state[i + 1]); //choose the velocity, odd indices
 
-		//Vector3f spring_force = Vector3f(-spring_const * (distance.abs() - rest_length)* distance / distance.abs());//self minus rest length, take other point as 0,0,0
 		Vector3f total_force = weight + drag;
 		f.push_back(state[i + 1]); //velocity
 		f.push_back(total_force); //force

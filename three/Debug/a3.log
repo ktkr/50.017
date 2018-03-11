@@ -1,4 +1,14 @@
-﻿  pendulumSystem.cpp
-pendulumSystem.cpp(15): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-pendulumSystem.cpp(92): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
+﻿  ClothSystem.cpp
+ClothSystem.cpp(14): warning C4018: '<': signed/unsigned mismatch
+ClothSystem.cpp(16): warning C4018: '<': signed/unsigned mismatch
+ClothSystem.cpp(29): warning C4018: '<': signed/unsigned mismatch
+ClothSystem.cpp(30): warning C4018: '<': signed/unsigned mismatch
+ClothSystem.cpp(33): warning C4018: '<': signed/unsigned mismatch
+ClothSystem.cpp(38): warning C4018: '<': signed/unsigned mismatch
+ClothSystem.cpp(44): warning C4018: '<': signed/unsigned mismatch
+ClothSystem.cpp(55): warning C4018: '<': signed/unsigned mismatch
+ClothSystem.cpp(60): warning C4018: '<': signed/unsigned mismatch
+ClothSystem.cpp(118): warning C4018: '<': signed/unsigned mismatch
+ClothSystem.cpp(170): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
+ClothSystem.cpp(174): warning C4018: '<': signed/unsigned mismatch
   a3.vcxproj -> C:\Users\kevin\Documents\GnV\three\Debug\a3.exe

@@ -3,6 +3,8 @@
 
 #include <vecmath.h>
 #include <vector>
+#include "spring.h"
+
 #ifdef _WIN32
 #include "GL/freeglut.h"
 #else
@@ -10,7 +12,6 @@
 #endif
 
 #include "particleSystem.h"
-
 class ClothSystem: public ParticleSystem
 {
 ///ADD MORE FUNCTION AND FIELDS HERE

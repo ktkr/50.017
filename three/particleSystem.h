@@ -24,10 +24,22 @@ public:
 	void setState(const vector<Vector3f>  & newState) { m_vVecState = newState; };
 	
 	virtual void draw() = 0;
+	//set wireframe drawing
+	bool wireframe = false;
+
+	bool moving = false;
+
+	bool forward = true;
+
+	bool wind = false;
+
+	int count = 0;
 	
 protected:
 
 	vector<Vector3f> m_vVecState;
+
+	
 	
 };
 

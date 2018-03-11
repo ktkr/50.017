@@ -17,13 +17,14 @@
 #include "TimeStepper.hpp"
 #include "simpleSystem.h"
 #include "pendulumSystem.h"
+#include "ClothSystem.h"
 using namespace std;
 
 // Globals here.
 namespace
 {
-
-    ParticleSystem *system;
+	int sys_count = 0;
+    ParticleSystem *sys;
     TimeStepper * timeStepper;
 	float h;
   // initialize your particle systems
@@ -33,7 +34,8 @@ namespace
     // seed the random number generator with the current time
     srand( time( NULL ) );
 	//system = new SimpleSystem();
-    system = new PendulumSystem(4); //set system when S is pressed?
+	//system = new PendulumSystem(4);
+    sys = new ClothSystem(10); //set system when S is pressed?
 	
 	//argc is the number of arguments
 	if (argc >= 2) {
@@ -74,7 +76,7 @@ namespace
   {
     if(timeStepper!=0){
 
-      timeStepper->takeStep(system,h);
+      timeStepper->takeStep(sys,h);
     }
   }
 
@@ -90,7 +92,7 @@ namespace
     
     glutSolidSphere(0.1f,10.0f,10.0f);
     
-    system->draw();
+    sys->draw();
     
     
     glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, floorColor);
@@ -138,6 +140,35 @@ namespace
             camera.SetCenter( Vector3f::ZERO );
             break;
         }
+
+		case 'w':
+		{
+			sys->wireframe = !sys->wireframe;
+			break;
+		}
+
+		case 's':
+		{
+			sys->moving = !sys->moving;
+			break;
+		}
+		case 't':
+		{
+			if (sys_count == 0) {
+				sys = new SimpleSystem();
+			}
+			else if (sys_count == 1) {
+				sys = new PendulumSystem(4);
+			}
+			else if (sys_count == 2) {
+				sys = new ClothSystem(10);
+			}
+			sys_count = (sys_count + 1) % 3;
+
+		}
+		case 'd':
+			sys->wind = !sys->wind;
+
         default:
             cout << "Unhandled key press " << key << "." << endl;        
         }
@@ -222,8 +253,8 @@ namespace
         glShadeModel(GL_SMOOTH);
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
         
-	glEnable(GL_CULL_FACE);
-	glCullFace(GL_BACK);
+	//glEnable(GL_CULL_FACE);
+	//glCullFace(GL_BACK);
 
         // Clear to black
         glClearColor(0,0,0,1);
