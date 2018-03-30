@@ -14,8 +14,8 @@ ClothSystem::ClothSystem(int length)
 	for (unsigned i = 0; i < length; i++) {
 		
 		for (unsigned j = 0; j < length; j++) {
-			state.push_back(Vector3f(j*0.2f + 0.5f,i*-0.2f + 3.0f,0)); // position
-			state.push_back(Vector3f::ZERO); // velocity
+			state.push_back(Vector3f(j*0.1f + 0.5f,i*-0.1f + 1.0f,0)); // position
+			state.push_back(Vector3f(0,0.1f,0)); // velocity
 		}
 	}
 
@@ -31,21 +31,24 @@ ClothSystem::ClothSystem(int length)
 			float rest_length;
 			//generate structural springs
 			if (j + 1 < length) {
-				rest_length = (state[indexOf(i, j)] - state[indexOf(i, j + 1)]).abs();
+				rest_length = 0.1f;
+				//rest_length = (state[indexOf(i, j)] - state[indexOf(i, j + 1)]).abs();
 				Spring s_horiz(indexOf(i, j), indexOf(i, j + 1), rest_length); //horizontal springs
 				structural.push_back(s_horiz);
 			}
 			if (i + 1 < length) {
-				rest_length = (state[indexOf(i, j)] - state[indexOf(i+1, j)]).abs();
+				//rest_length = (state[indexOf(i, j)] - state[indexOf(i+1, j)]).abs();
+				rest_length = 0.1f;
 				Spring s_vert(indexOf(i, j), indexOf(i + 1, j), rest_length);
 				structural.push_back(s_vert);
 			}
 			//generate shear springs
 			if (i + 1 < length && j + 1 < length) {
-				rest_length = (state[indexOf(i, j)] - state[indexOf(i + 1, j + 1)]).abs();
+				//rest_length = (state[indexOf(i, j)] - state[indexOf(i + 1, j + 1)]).abs();
+				rest_length = 0.14f;
 				Spring s_tl_br(indexOf(i, j), indexOf(i + 1, j + 1), rest_length);//top left to bottom right
 				shear.push_back(s_tl_br);
-				rest_length = (state[indexOf(i + 1, j)] - state[indexOf(i, j + 1)]).abs();
+				//rest_length = (state[indexOf(i + 1, j)] - state[indexOf(i, j + 1)]).abs();
 				Spring s_bl_tr(indexOf(i + 1, j), indexOf(i, j + 1), rest_length);
 				shear.push_back(s_bl_tr);
 			}
@@ -53,12 +56,14 @@ ClothSystem::ClothSystem(int length)
 			//generate flex springs
 			//do checks on exceeding the index.
 			if (j + 2 < length) {
-				rest_length = (state[indexOf(i, j)] - state[indexOf(i, j + 2)]).abs();
+				//rest_length = (state[indexOf(i, j)] - state[indexOf(i, j + 2)]).abs();
+				rest_length = 0.2f;
 				Spring s_horiz2(indexOf(i, j), indexOf(i, j + 2), rest_length);
 				flex.push_back(s_horiz2);
 			}
 			if (i + 2 < length) {
-				rest_length = (state[indexOf(i, j)] - state[indexOf(i + 2, j)]).abs();
+				rest_length = 0.2f;
+				//rest_length = (state[indexOf(i, j)] - state[indexOf(i + 2, j)]).abs();
 				Spring s_vert2(indexOf(i, j), indexOf(i + 2, j), rest_length);
 
 				flex.push_back(s_vert2);
@@ -74,15 +79,16 @@ ClothSystem::ClothSystem(int length)
 vector<Vector3f> ClothSystem::evalF(vector<Vector3f> state)
 {
 	vector<Vector3f> f;
-	float mass = 0.005f;
+	float mass = 0.15f;
 	float g = 9.81f;
-	float drag_coeff = 0.1f;
-	float spring_const = 5.0f;
+	float drag_coeff = 3.0f;
+	float spring_const = 20.0f;
 	Vector3f weight = Vector3f(0, -mass * g, 0);
 
 	//for each particle, generate the drag and weight
 	for (unsigned i = 0; i < state.size() / 2; i++) {
-		Vector3f drag = Vector3f(-drag_coeff * state[2*i + 1]); //choose the velocity, odd indices
+		Vector3f v = state[2 * i + 1];
+		Vector3f drag = -drag_coeff * Vector3f(v.x(), v.y(), v.z()); //choose the velocity, odd indices
 
 		Vector3f total_force = weight + drag;
 		f.push_back(state[2*i+1]); //velocity
@@ -114,11 +120,11 @@ vector<Vector3f> ClothSystem::evalF(vector<Vector3f> state)
 	}
 
 	if (wind) {
-		float r = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-		Vector3f wind = Vector3f::ZERO + Vector3f(0,0,r*0.1);
+
 		
 		for (int i = 0; i < f.size() / 2; i++) {
-			
+			float r = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+			Vector3f wind = Vector3f::ZERO + Vector3f(0, 0, r*2.0f);
 			f[2 * i + 1] += wind;
 		}
 	}
@@ -136,18 +142,18 @@ vector<Vector3f> ClothSystem::evalF(vector<Vector3f> state)
 	}
 	else {
 		Vector3f speed;
-		if (getState()[0].z() > 3){
+		if (getState()[0].z() > 1){
 			forward = false;
 		}
-		if (getState()[0].z() < -3) {
+		if (getState()[0].z() < -1) {
 			forward = true;
 		}
 
 		if (forward) {
-			speed = Vector3f(0, 0, 3.0f);
+			speed = Vector3f(0, 0, 1.5f);
 		}
 		else {
-			speed = Vector3f(0, 0, -3.0f);
+			speed = Vector3f(0, 0, -1.5f);
 		}
 		f[0] = speed;
 		f[1] = Vector3f::ZERO;
@@ -167,7 +173,7 @@ void ClothSystem::draw()
 	//draw the wireframe
 	if (wireframe) {
 
-		for (unsigned i = 0; i < state.size() / 2; i++) {
+		for (unsigned i = 0; i < getState().size() / 2; i++) {
 			Vector3f pos = getState()[2 * i];//  position of particle 
 			glPushMatrix();
 			glTranslatef(pos[0], pos[1], pos[2]);
@@ -182,8 +188,6 @@ void ClothSystem::draw()
 			glPushMatrix();
 			glLineWidth(0.1f);
 			glBegin(GL_LINES);
-			glClearColor(0, 0, 0, 1);
-			glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 
 			glVertex3f(s[structural[i].node2].x(), s[structural[i].node2].y(), s[structural[i].node2].z());
 			glVertex3f(s[structural[i].node1].x(), s[structural[i].node1].y(), s[structural[i].node1].z());

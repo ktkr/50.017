@@ -23,7 +23,7 @@ using namespace std;
 // Globals here.
 namespace
 {
-	int sys_count = 0;
+	int sys_count = 2;
     ParticleSystem *sys;
     TimeStepper * timeStepper;
 	float h;
@@ -42,15 +42,19 @@ namespace
 		switch (*argv[1]) {
 		case 'e':
 			timeStepper = new ForwardEuler();
+			
 			break;
 		case 't':
 			timeStepper = new Trapzoidal();
+			
 			break;
 		case 'r':
 			timeStepper = new RK4();
+			
 			break;
 		default:
 			timeStepper = new RK4();
+			
 			break;
 		}
 		
@@ -154,6 +158,8 @@ namespace
 		}
 		case 't':
 		{
+			sys_count = (sys_count + 1) % 3;
+
 			if (sys_count == 0) {
 				sys = new SimpleSystem();
 			}
@@ -163,7 +169,7 @@ namespace
 			else if (sys_count == 2) {
 				sys = new ClothSystem(8);
 			}
-			sys_count = (sys_count + 1) % 3;
+
 			break;
 		}
 		case 'd':
