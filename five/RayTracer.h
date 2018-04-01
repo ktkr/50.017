@@ -22,10 +22,8 @@ public:
   RayTracer( SceneParser* scene, int max_bounces //more arguments as you need...
   );
   ~RayTracer();
-
-  float getReflectivity(float inc_refr_index, float surf_refr_index) const;
   
-  Vector3f traceRay( Ray& ray, float tmin, int bounces, Hit& hit ) const;
+  Vector3f traceRay( Ray& ray, float tmin, int bounces,float refr_index, Hit& hit ) const;
 private:
   SceneParser* m_scene;
 

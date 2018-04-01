@@ -14,6 +14,11 @@ using namespace std;
 float clampedDepth ( float depthInput, float depthMin , float depthMax);
 
 #include "bitmap_image.hpp"
+
+void GaussianBlur() {
+
+}
+
 int main( int argc, char* argv[] )
 {
   // Fill in your implementation here.
@@ -44,15 +49,19 @@ int main( int argc, char* argv[] )
   float tmin = cam->getTMin();
   Image image(height, width);
   RayTracer rt = RayTracer(&sp,bounces);
+  //Jittered sampling, 3x the sampling with randomness
+  srand(NULL);
   for (int i = 0; i < width; i++) {
 	  for (int j = 0; j < height; j++) {
-		  float x = float(i) / float(width - 1) * 2 - 1;
-		  float y = float(j) / float(height - 1) * 2 - 1;
+		  float x = (float(i) / float(width - 1) * 2 - 1);
+		  float y = (float(j) / float(height - 1) * 2 - 1);
+		  //float ri = -0.5f + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX));
+		  //float rj = -0.5f + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX));
 
 		  //create ray, find intersections.
 		  Ray r = cam->generateRay(Vector2f(x, y));
 		  Hit h = Hit();
-		  Vector3f col = rt.traceRay(r, tmin, bounces, h);
+		  Vector3f col = rt.traceRay(r, tmin, bounces, 1.0f, h);
 		  //write color
 		  image.SetPixel(i, j, col);
 
@@ -60,13 +69,6 @@ int main( int argc, char* argv[] )
   }
   image.SaveImage(outFile);
  // std::getchar();
-  /////TODO: below demonstrates how to use the provided Image class
-  /////Should be removed when you start
-  //Vector3f pixelColor (1.0f,0,0);
-  ////width and height
-  //Image image( 10 , 15 );
-  //image.SetPixel( 5,5, pixelColor );
-  //image.SaveImage("demo.bmp");
-  //return 0;
+
 }
 

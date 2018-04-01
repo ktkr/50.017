@@ -1,13 +1,14 @@
 ﻿  RayTracer.cpp
-c:\users\kevin\documents\gnv\five\Group.h(36): warning C4018: '<': signed/unsigned mismatch
-RayTracer.cpp(74): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-RayTracer.cpp(103): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.12.25827\include\xutility(2430): warning C4996: 'std::copy::_Unchecked_iterators::_Deprecate': Call to 'std::copy' with parameters that may be unsafe - this call relies on the caller to check that the passed values are correct. To disable this warning, use -D_SCL_SECURE_NO_WARNINGS. See documentation on how to use Visual C++ 'Checked Iterators'
-  C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.12.25827\include\xutility(2430): note: see declaration of 'std::copy::_Unchecked_iterators::_Deprecate'
-  c:\users\kevin\documents\gnv\five\bitmap_image.hpp(159): note: see reference to function template instantiation '_OutIt *std::copy<unsigned char*,unsigned char*>(_InIt,_InIt,_OutIt)' being compiled
+d:\gnv\five\group.h(36): warning C4018: '<': signed/unsigned mismatch
+d:\gnv\five\raytracer.cpp(89): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+d:\gnv\five\raytracer.cpp(125): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+d:\gnv\five\raytracer.cpp(142): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\xutility(2440): warning C4996: 'std::copy::_Unchecked_iterators::_Deprecate': Call to 'std::copy' with parameters that may be unsafe - this call relies on the caller to check that the passed values are correct. To disable this warning, use -D_SCL_SECURE_NO_WARNINGS. See documentation on how to use Visual C++ 'Checked Iterators'
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\xutility(2440): note: see declaration of 'std::copy::_Unchecked_iterators::_Deprecate'
+  d:\gnv\five\bitmap_image.hpp(159): note: see reference to function template instantiation '_OutIt *std::copy<unsigned char*,unsigned char*>(_InIt,_InIt,_OutIt)' being compiled
           with
           [
               _OutIt=unsigned char *,
               _InIt=unsigned char *
           ]
-  a4.vcxproj -> C:\Users\kevin\Documents\GnV\five\Debug\a5.exe
+  a4.vcxproj -> D:\GnV\five\Debug\a5.exe
