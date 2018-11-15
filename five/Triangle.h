@@ -31,27 +31,20 @@ public:
 		float gamma = Matrix3f(a - b, a - ray.getOrigin(), ray.getDirection()).determinant() / A;
 		float alpha = 1.0f - beta - gamma;
 
+
 		if (beta + gamma <= 1 && beta >= 0 && gamma >= 0) {
 
 			float t = Matrix3f(a - b, a - c, a- ray.getOrigin()).determinant() /A;
 
-			if (t >= tmin) {
+			if (t >= tmin && t < hit.getT()) {
 
-				if (t < hit.getT()) {
-					Vector3f norm = alpha * normals[0] + beta * normals[1] + gamma * normals[2];
-					hit.set(t, this->material, norm.normalized());
-					if (hasTex) {
-						Vector2f coord = alpha * texCoords[0] + beta * texCoords[1] + gamma * texCoords[2];
-						hit.setTexCoord(coord);
-					}
-					
-				}
+				Vector3f norm = alpha * normals[0] + beta * normals[1] + gamma * normals[2];
+				hit.set(t, this->material, norm.normalized());
+				Vector2f coord = alpha * texCoords[0] + beta * texCoords[1] + gamma * texCoords[2];
+				hit.setTexCoord(coord);	
 				return true;
-				
 			}
 		}
-
-
 		return false;
 	}
 	bool hasTex;

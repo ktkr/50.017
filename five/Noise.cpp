@@ -7,7 +7,8 @@ Vector3f Noise::getColor(const Vector3f & pos)
   //INTERPOLATE BETWEEN TWO COLORS BY WEIGHTED AVERAGE
 	float noise = PerlinNoise::octaveNoise(pos, octaves);
 	//M(x, y, z) = sin(wx + aN(x, y, z))
-	float m= sin(frequency*pos.x() + amplitude * noise);
+	float m= (sin(frequency*pos.x() + amplitude * noise) + 1.0f)/2;
+	
 	//color direction vector multiplied by the amount of noise added to the initial color.
 	Vector3f colorLerp = (color[0] - color[1]) * m + color[1];
 	return colorLerp;

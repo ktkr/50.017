@@ -14,44 +14,43 @@ using  namespace std;
 ///TODO: 
 ///Implement Group
 ///Add data structure to store a list of Object* 
-class Group:public Object3D
+class Group :public Object3D
 {
 public:
 
-  Group(){
+	Group() {
 
-  }
-	
-  Group( int num_objects ){
-	  //fill with dummies
-	  objects.resize(num_objects);
-  }
+	}
 
-  ~Group(){
-   
-  }
+	Group(int num_objects) {
+		//fill with dummies
+		objects.resize(num_objects);
+	}
 
-  virtual bool intersect( const Ray& r , Hit& h , float tmin ) {
-	  bool intersected = false;
-	  for (int i = 0; i < objects.size(); i++) {
-		  if (objects[i]->intersect(r, h, tmin)) {
-			  intersected = true;
-		  }
-	  }
-	  return intersected;
-   }
-	
-  void addObject( int index , Object3D* obj ){
-	  objects[index] = obj;
-  }
+	~Group() {
 
-  int getGroupSize(){ 
-	  return objects.size();
-  }
+	}
 
- private:
-	 vector<Object3D *> objects;
+	virtual bool intersect(const Ray& r, Hit& h, float tmin) {
+		bool intersected = false;
+		for (int i = 0; i < objects.size(); i++) {
+			if (objects[i]->intersect(r, h, tmin)) {
+				intersected = true;
+			}
+		}
+		return intersected;
+	}
+
+	void addObject(int index, Object3D* obj) {
+		objects[index] = obj;
+	}
+
+	int getGroupSize() {
+		return objects.size();
+	}
+
+private:
+	vector<Object3D *> objects;
 };
 
 #endif
-	

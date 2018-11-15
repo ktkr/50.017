@@ -19,8 +19,6 @@ public:
 
     virtual Vector3f getDiffuseColor() const ;
 
-	Vector3f getTextureColor(Hit & h);
-
     Vector3f Shade( const Ray& ray, const Hit& hit,
             const Vector3f& dirToLight, const Vector3f& lightColor ) ;
 

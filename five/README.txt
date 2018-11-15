@@ -5,13 +5,12 @@ References:
 Mostly the slides
 
 Problems:
-Image 8 and 9 are about 99% similar to the solution.
+No problems. Image looks exactly like solution.
 
 Extra Credits:
 None
 
 Comments:
-
-Instructions were unclear on using diffuseColor / textureColor for ambient light calculations
-Also, several things had to be normalized before the code would work.
-Was quite confused on several of the implementations, could have been more descriptive in what exactly the function was expected to do.
+Material class was re-written. The implementation of the assignment 4 material was not the same as the one in assignment 5.
+Also, it should be explicitly mentioned that we are supposed to multiply by the specular color for reflected and refracted rays.
+A relatively quicker assignment compared to assignment 3 and 4. Can be more explicit about certain instructions or else tell people that the formula is in the slides etc.

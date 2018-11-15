@@ -55,11 +55,6 @@ Vector3f Material::getSpecularColor(){
 	return specularColor;
 }
 
-Vector3f Material::getTextureColor(Hit& h) {
-	if (t.valid() && h.hasTex) {
-		return t(h.texCoord[0], h.texCoord[1]);
-	}
-}
 
 void Material::setNoise(const Noise & n)
 {

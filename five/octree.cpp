@@ -3,6 +3,7 @@
 #include "Vector3f.h"
 #include "Mesh.hpp"
 #include "octree.hpp"
+#include <algorithm>
 #include <vector>
 
 ///@brief two intervals intersect
@@ -253,8 +254,7 @@ void Octree::intersect(const Ray & ray){
 	float tz0 = (box.mn[2] - ro[2]) * divz;
 	float tz1 = (box.mx[2] - ro[2]) * divz;
 
-
-	if (std::fmaxf(std::fmaxf(tx0, ty0), tz0) <= std::fminf(std::fminf(tx1, ty1), tz1)) {
+	if( max(max(tx0,ty0),tz0) <= min(min(tx1,ty1),tz1) ){
 		proc_subtree(tx0,ty0,tz0,tx1,ty1,tz1, &root);
 	}
 }
